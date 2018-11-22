@@ -9,7 +9,7 @@
 // Ensure "gosnmp-test-host" is defined in your hosts file, and points to your
 // generic test system.
 
-// +build all end2end
+// +build all end2end integration
 
 package gosnmp
 
@@ -27,12 +27,14 @@ func setupConnection(t *testing.T) {
 	envPort := os.Getenv("GOSNMP_PORT")
 
 	if len(envTarget) <= 0 {
-		t.Error("environment variable not set: GOSNMP_TARGET")
+		t.Fatal("environment variable not set: GOSNMP_TARGET")
+		os.Exit(1)
 	}
 	Default.Target = envTarget
 
 	if len(envPort) <= 0 {
-		t.Error("environment variable not set: GOSNMP_PORT")
+		t.Fatal("environment variable not set: GOSNMP_PORT")
+		os.Exit(1)
 	}
 	port, _ := strconv.ParseUint(envPort, 10, 16)
 	Default.Port = uint16(port)
@@ -51,12 +53,14 @@ func setupConnectionIPv4(t *testing.T) {
 	envPort := os.Getenv("GOSNMP_PORT_IPV4")
 
 	if len(envTarget) <= 0 {
-		t.Error("environment variable not set: GOSNMP_TARGET_IPV4")
+		t.Fatal("environment variable not set: GOSNMP_TARGET_IPV4")
+		os.Exit(1)
 	}
 	Default.Target = envTarget
 
 	if len(envPort) <= 0 {
-		t.Error("environment variable not set: GOSNMP_PORT_IPV4")
+		t.Fatal("environment variable not set: GOSNMP_PORT_IPV4")
+		os.Exit(1)
 	}
 	port, _ := strconv.ParseUint(envPort, 10, 16)
 	Default.Port = uint16(port)

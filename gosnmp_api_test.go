@@ -7,7 +7,7 @@
 // IMPORTANT: If you're modifying _any_ existing code in this file, you
 // should be asking yourself about API compatibility!
 
-// +build all api
+// +build all api !integration
 
 package gosnmp_test // force external view
 

@@ -200,6 +200,14 @@ time or haven't been able to find example devices to query:
 Running the Tests
 -----------------
 
+To run unit tests:
+
+```shell
+go test -v -tags '!integration'
+```
+
+To run integration tests:
+
 ```shell
 export GOSNMP_TARGET=1.2.3.4
 export GOSNMP_PORT=161
@@ -207,19 +215,17 @@ export GOSNMP_TARGET_IPV4=1.2.3.4
 export GOSNMP_PORT_IPV4=161
 export GOSNMP_TARGET_IPV6='0:0:0:0:0:ffff:102:304'
 export GOSNMP_PORT_IPV6=161
-go test -v -tags all        # for example
-go test -v -tags helper     # for example
+go test -v -tags 'integration'
 ```
 
-Tests are grouped as follows:
+To run all tests or individual groups of tests:
 
-* Unit tests (validating data packing and marshalling):
-   * `marshal_test.go`
-   * `misc_test.go`
-* Public API consistency tests:
-   * `gosnmp_api_test.go`
-* End-to-end integration tests:
-   * `generic_e2e_test.go`
+```shell
+go test -v -tags all     # will require above environment variables
+go test -v -tags helper
+```
+
+Test tags are: `end2end, api, helper, marshal, misc, trap, integration, !integration, all`
 
 The generic end-to-end integration test `generic_e2e_test.go` should
 work against any SNMP MIB-2 compliant host (e.g. a router, NAS box, printer).
